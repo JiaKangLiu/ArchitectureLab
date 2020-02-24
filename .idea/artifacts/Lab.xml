@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Lab">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="Lab.war">
+      <element id="dir-copy" path="$PROJECT_DIR$/src/main/webapp" />
+    </root>
+  </artifact>
+</component>

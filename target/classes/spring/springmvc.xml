@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+    <!-- 自动扫描该包，SpringMVC会将包下用了@controller注解的类注册为Spring的controller -->
+    <context:component-scan base-package="cn.edu.ncu.architecture.lab.controllers"/>
+    <!-- 设置默认配置方案 -->
+    <mvc:annotation-driven/>
+    <!-- 使用默认的Servlet来响应静态文件 -->
+    <mvc:default-servlet-handler/>
+    <!-- 视图解析器  -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    </bean>
+
+
+    <!--配置拦截器，只拦截管理员相关接口-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/api/**" />
+            <mvc:exclude-mapping path="/api/Contact/getContact" />
+            <mvc:exclude-mapping path="/api/Academic/getAcademic" />
+            <mvc:exclude-mapping path="/api/Academic/getAllAcademic" />
+            <mvc:exclude-mapping path="/api/International/getInternational" />
+            <mvc:exclude-mapping path="/api/International/getAllInternationals" />
+            <mvc:exclude-mapping path="/api/School/getSchool" />
+            <mvc:exclude-mapping path="/api/School/getAllSchools" />
+            <mvc:exclude-mapping path="/api/Dynamic/getDynamic" />
+            <mvc:exclude-mapping path="/api/Dynamic/getAllDynamic" />
+            <mvc:exclude-mapping path="/api/Instrument/getInstrumentById" />
+            <mvc:exclude-mapping path="/api/Instrument/getAllInstrument" />
+            <mvc:exclude-mapping path="/api/Introduction/getIntroductionById" />
+            <mvc:exclude-mapping path="/api/Organization/getOrganization" />
+            <mvc:exclude-mapping path="/api/PersonnelTraining/getPersonnelTraining" />
+            <mvc:exclude-mapping path="/api/Recruit/getRecruit" />
+            <mvc:exclude-mapping path="/api/ResearchAreas/getResearchAreas" />
+            <mvc:exclude-mapping path="/api/ResearchResults/getResearchResults" />
+            <mvc:exclude-mapping path="/api/ResearchTeam/getResearchTeam" />
+            <mvc:exclude-mapping path="/api/Work/getWorkById" />
+            <mvc:exclude-mapping path="/api/Work/getAllWorks" />
+            <mvc:exclude-mapping path="/api/User/login" />
+            <mvc:exclude-mapping path="/api/User/register" />
+            <bean class="cn.edu.ncu.architecture.lab.utils.AuthInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>
